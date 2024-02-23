@@ -1,0 +1,112 @@
+\documentclass{article}
+
+% Packages
+\usepackage{amsmath} % For mathematical equations
+\usepackage{graphicx} % For including figures
+\usepackage{cite} % For citations
+\usepackage{lipsum} % For generating dummy text
+
+% Title
+\title{In house high Q Electro-Optic Modulator for Molecular Imaging }
+\author{A. C. Baldock}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    % Abstract of your paper
+\end{abstract}
+
+\section{Introduction}
+This paper outlines the theory and the method to construct a resonant
+electro-optic modular (EOM) for molecular imaging. 
+
+\section{Theory}
+An electro-optic phase modulator is a device which converts an time-varying
+electric field (typically in the RF frequency) into a modulate of the phase of an
+optical frequency. This is achieved by sending linearly polarized light along
+the an axis of a nonlinear crystal while modulating the crystal's index of
+refraction \(n_e\).
+
+Appling a voltage $V$ across the crystal will induce a phase shift, \(\Delta\phi\), of~\cite{Mok}
+\begin{equation}
+    \Delta\phi = \frac{\pi n_e^3r_{33}}{\lambda}\frac{V l}{d}
+    \label{eq:phase_shift}
+\end{equation}.
+
+$r_{33}$ is the electro-optic coefficient which is defined by the choice of crystal, \(\lambda\) is the wavelength of the
+light, \(l\) is the length of the crystal, and \(d\) is the distance between the
+electrodes.
+
+EOMs are characterised by the half wave voltage which results in a phase shift of \(\Delta\phi=\pi\). This is given by
+\begin{equation}
+    V_{\pi} = \frac{\lambda d}{n_e^3r_{33}l}.
+    \label{eq:half_wave_voltage}
+\end{equation}
+
+Treating the crystal as a distributed capacitor we can design a LCR tank circuit
+to resonate at the desired frequency. The resonant frequency is given by,
+\begin{equation}
+    f_0 = \frac{1}{2\pi\sqrt{LC}},
+    \label{eq:resonant_frequency}
+\end{equation}
+where \(C\) is the capacitance of the crystal and \(L\) is the inductance of the
+tank circuit which we select to define the operational frequency of the EOM.
+Driving the EOM at the resonant frequency from an RF source will result in the 
+maximim power transfer into the crystal and hence the maximum phase modulation.
+
+Applying a time varying voltage across the crystal induces a time dependence
+onto the refractive index of the crystal. This results in a phase modulation
+which produces sidebands around the carrier frequency $\Omega$ which the separation
+dictated the RF driving frequency, $\omega$. The amplitude of the sidebands are given by,
+\begin{equation}
+    \mathbf{E}(t) = \mathbf{E}_0\sum_{n=-\infty}^{\infty}J_n(M)e^{it(\Omega+n\omega)},
+\end{equation}
+where $\mathbf{E}_0$ is the amplitude of the carrier, $J_n$ is the Bessel
+function of the $n$ kind, and $M$ is the modulation index given by,
+\begin{equation}\label{eq:modulation_index}
+    M = \frac{\pi V}{V_{\pi}},
+\end{equation}
+wehre $V$ is the amplitude of the driving voltage. For typical crystal specifications it 
+is easy to produce the first order sidebands, even with a modulation index of $M\ll 1$. 
+To produce higher order sidebands it is evident from equation \ref{eq:modulation_index} that
+a higher driving voltage is required. 
+
+It is typical to use a RF amplifier to increase to driving voltage to get the
+desired modulation index. An important note is in a resonant LCR tank circuit
+the Q-factor increases the voltage across the crystal by a factor of Q, so it is
+imperative to design a EOM with a high Quality factor.
+
+In order to minimise the power reflection into the EOM crystal it is important
+to match the impedance of the driving source, typically 50$~\Omega$, to the
+characteristic impedance of the LCR circuit. This duty can be preformed by
+a transformer whos turns ratio is given by,
+\begin{equation}
+    \frac{N_1}{N_2} = \sqrt{\frac{Z_1}{Z_2}},
+\end{equation}
+where $N_1$ and $N_2$ are the number of turns in the primary and secondary and
+$Z_1$ and $Z_2$ are the characteristic impedances of the driving source and the
+LCR circuit respectively.
+
+\section{Construction}
+
+Our EOM uses a 5\% MgO doped LiNbO$_3$ crystal with a length of 40mm and a width
+and height of 3mm. The crystal has a refractive index of 2.2 and a electro-optic
+coefficient of $r_{33}=30.9$ pm/V. This was mounted on a electrically isolated
+acrylic block, and secured with two copper electrodes. The electrodes were
+sufficiently large enough to act as a heat sink for the crystal in order to
+minimise thermal induced lensing effects.
+
+
+\begin{thebibliography}{9}
+    \bibitem{Mok}
+    C Mok, M Weel, E Rotberg, and A Kumarakrishnan. Design and construction of
+    an efficient electro-optic modulator for laser spectroscopy (2016). Canadian
+    Journal of Physics. 84(9): 775-786.
+\end{thebibliography}    
+
+
+
+\end{document}
